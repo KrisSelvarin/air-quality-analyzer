@@ -24,7 +24,7 @@ logs/*.txt
 
 # --- Reports ---
 # Keep reports folder
-!reports/.gitkeep
+!output/reports/.gitkeep
 
 # --- System Files ---
 .DS_Store
