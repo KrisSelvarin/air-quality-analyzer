@@ -22,10 +22,6 @@ logs/*.log
 logs/*.txt
 !logs/.gitkeep
 
-# --- Reports ---
-# Keep reports folder
-!output/reports/.gitkeep
-
 # --- System Files ---
 .DS_Store
 Thumbs.db
