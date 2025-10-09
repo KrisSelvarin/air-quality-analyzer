@@ -1,0 +1,33 @@
+# --- Python Bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual Environments ---
+venv/
+.env/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# --- Logs ---
+# Keep the logs folder but ignore log files inside
+logs/*.log
+logs/*.txt
+!logs/.gitkeep
+
+# --- System Files ---
+.DS_Store
+Thumbs.db
+
+# --- IDE / Editor Files ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-*
