@@ -15,27 +15,43 @@ GRAPH_DIR.mkdir(parents=True, exist_ok=True)
 
 def main():
 
+    # ----------------------------------------------------------
     # Data cleaning
+    # ----------------------------------------------------------
+
     logger.info('Cleaning Data')
     df = data_clean()
     logger.info('Data Cleaned')
 
+    # ----------------------------------------------------------
     # Exploratory Data Analysis
+    # ----------------------------------------------------------
+
     logger.info('Create object explore with dataframe')
     explore = Exploratory(df)
 
-    # for CO distribution
-    title_co = 'Distribution of CO Concentration (Ground Truth)'
-    var_co = 'CO(GT)'
-    xlabel_co = 'CO Concentration (GT)'
+    # ----------------------------------------------------------
+    # 1. Distribution
 
-    logger.info('Creating histogram for CO distribution')
-    fig_co = explore.distribution(title_co, var_co, xlabel_co)
-    logger.info('Created.')
+    plot = [
+        ('Distribution of Carbon Monoxide Concentration (Ground Truth)', 'CO(GT)', 'CO Concentration (GT)', 'histogram_co.png'),
+        ('Distribution of Non-Metanic HydroCarbons (Ground Truth)', 'NMHC(GT)', 'NMHC Concentration (GT)', 'histogram_nmhc.png'),
+        ('Distribution of Nitrous Oxides (Ground Truth)', 'NOx(GT)', 'NOx Concentration (GT)', 'histogram_nox.png'),
+        ('Distribution of Nitrous Dioxide (Ground Truth)', 'NO2(GT)', 'NOx Concentration (GT)', 'histogram_no2.png')
+    ]
 
-    # save figure
-    fig_co.savefig(GRAPH_DIR / 'histogram_co.png')
-    logger.info(f'Figure saved to {GRAPH_DIR}')
+    for title, var, xlabel, filename in plot:
+        logger.info(f'Creating histogram for {var} distribution')
+        fig = explore.distribution(title, var, xlabel)
+        fig.savefig(GRAPH_DIR / filename)
+        logger.info(f'Figure saved to {GRAPH_DIR}')
+
+    # ----------------------------------------------------------
+    # 2. Trends over time
+
+    # TODO: function for line plot
+
+
 
 if __name__ == '__main__':
     main()
