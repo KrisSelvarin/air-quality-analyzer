@@ -56,5 +56,5 @@ def data_clean() -> pd.DataFrame:
         return df
 
     except Exception as e:
-        logger.exception('Error during data cleaning')
+        logger.exception('Error during data cleaning: %s', e, exc_info=True)
         raise
