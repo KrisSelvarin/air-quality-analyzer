@@ -36,7 +36,6 @@ def main():
 
     plot_distribution = [
         ('Distribution of Carbon Monoxide Concentration (Ground Truth)', 'CO(GT)', 'CO Concentration (GT)', 'histogram_co.png'),
-        ('Distribution of Non-Metanic HydroCarbons Concentration (Ground Truth)', 'NMHC(GT)', 'NMHC Concentration (GT)', 'histogram_nmhc.png'),
         ('Distribution of Nitrous Oxides Concentration (Ground Truth)', 'NOx(GT)', 'NOx Concentration (GT)', 'histogram_nox.png'),
         ('Distribution of Nitrous Dioxide Concentration (Ground Truth)', 'NO2(GT)', 'NOx Concentration (GT)', 'histogram_no2.png')
     ]
@@ -52,7 +51,6 @@ def main():
 
     plot_trends = [
         ('CO Conecentration from 2004-03-10 to 2005-04-04', 'Date', 'CO(GT)', 'CO Concentration Daily Avg. Level', 'line_co.png'),
-        ('NMHC Concentration from 2004-03-10 to 2005-04-04', 'Date', 'NMHC(GT)', 'NMHC Concentration Daily Avg. Level', 'line_nmhc.png'),
         ('NOx Concentration from 2004-03-10 to 2005-04-04', 'Date', 'NOx(GT)', 'NOx Concentration Daily Avg. Level', 'line_nox.png'),
         ('NO2 Concentration from 2004-03-10 to 2005-04-04', 'Date', 'NO2(GT)', 'NO2 Concentration Daily Avg. Level', 'line_no2.png')
     ]
@@ -63,6 +61,23 @@ def main():
         fig_line.savefig(GRAPH_DIR / filename_line)
         logger.info(f'Figure saved to {GRAPH_DIR}')
 
+    # ----------------------------------------------------------
+    # 3. Relationship between variables
+
+    plot_relation = [
+        ('Temperature vs CO(GT)', 'T', 'CO(GT)', 'Temperature (°C)', 'CO Concentration (mg/m³)', 'corr_T_vs_CO(GT).png'),
+        ('Temperature vs NOx(GT)', 'T', 'NOx(GT)', 'Temperature (°C)', 'NOx Concentration (µg/m³)', 'corr_T_vs_NOx(GT).png'),
+        ('Temperature vs NO2(GT)', 'T', 'NO2(GT)', 'Temperature (°C)', 'NO2 Concentration (µg/m³)', 'corr_T_vs_NO2(GT).png'),
+        ('CO(GT) vs NOx(GT)', 'CO(GT)', 'NOx(GT)', 'CO Concentration (mg/m³)', 'NOx Concentration (µg/m³)', 'corr_CO(GT)_vs_NOx(GT).png'),
+        ('CO(GT) vs NO2(GT)', 'CO(GT)', 'NO2(GT)', 'CO Concentration (mg/m³)', 'NO2 Concentration (µg/m³)', 'corr_CO(GT)_vs_NO2(GT).png'),
+        ('NOx(GT) vs NO2(GT)', 'NOx(GT)', 'NO2(GT)', 'NOx Concentration (µg/m³)', 'NO2 Concentration (µg/m³)', 'corr_NOx(GT)_vs_NO2(GT).png')
+    ]
+
+    for title_scat, x_scat, y_scat, xlabel_scat, ylabel_scat, filename_scat in plot_relation:
+        logger.info(f'Creating scatterplot for {title_scat}')
+        fig_scat = explore.relation(title_scat, x=x_scat, y=y_scat, xlabel=xlabel_scat, ylabel=ylabel_scat)
+        fig_scat.savefig(GRAPH_DIR / filename_scat)
+        logger.info(f'Figure saved to {GRAPH_DIR}')
 
 if __name__ == '__main__':
     start = time.time()
