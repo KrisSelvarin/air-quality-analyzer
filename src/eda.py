@@ -183,7 +183,7 @@ class Exploratory:
                 raise KeyError(f"Columns {x} or {y} not found in DataFrame.")
             
             # create scatter plot
-            logger.info(f'Created scartter plot with x as {x} and y as {y}')
+            logger.info(f'Created scatter plot with x as {x} and y as {y}')
             sns.scatterplot(data=self.df, x=x, y=y, hue='RH', alpha=0.6, ax=ax)
 
             # create regplot
@@ -220,3 +220,9 @@ class Exploratory:
         except Exception as e:
             logger.error(f'Error while generating relation plot {title}: %s', e, exc_info=True)
             raise
+
+    # for sensor calibration
+    def sensor(self):
+        """
+        For 
+        """

@@ -14,6 +14,8 @@ BASE_DIR = Path(__file__).resolve().parent
 GRAPH_DIR = BASE_DIR / 'output' / 'graphs'
 GRAPH_DIR.mkdir(parents=True, exist_ok=True)
 
+# TODO: make new directory for sensor performance evaluation
+
 def main():
 
     # ----------------------------------------------------------
