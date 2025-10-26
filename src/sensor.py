@@ -1,4 +1,4 @@
-# sensor.py - for sensor calibration validation
+# sensor.py - for sensor performance evaluation
 # my first time touching machine learning 
 
 import numpy as np
@@ -126,4 +126,3 @@ class Sensor:
         # use sklearn.model_selection -  train_test_split
         # if R² similar on train and test, then it's a stable calibration
         # if R² drops heavily on test, then it's overfitting/unreliable calibration
-        

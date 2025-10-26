@@ -81,6 +81,12 @@ def main():
         fig_scat.savefig(GRAPH_DIR / filename_scat)
         logger.info(f'Figure saved to {GRAPH_DIR}')
 
+    # ----------------------------------------------------------
+    # Sensor Performance Evaluation
+    # ----------------------------------------------------------
+
+    # TODO: sensor perfomance evaluation 
+
 if __name__ == '__main__':
     start = time.time()
     logger.info(f'Program Started. {start}')
