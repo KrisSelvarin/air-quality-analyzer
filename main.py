@@ -9,12 +9,16 @@ import time
 # logger
 logger = setup_logger(__name__)
 
-# Directory
+# Base Directory
 BASE_DIR = Path(__file__).resolve().parent
-GRAPH_DIR = BASE_DIR / 'output' / 'graphs'
+
+# for EDA
+GRAPH_DIR = BASE_DIR / 'output' / 'graphs' / 'eda'
 GRAPH_DIR.mkdir(parents=True, exist_ok=True)
 
-# TODO: make new directory for sensor performance evaluation
+# for sensor performance evaluation
+SENSOR_DIR = BASE_DIR / 'output' / 'graphs' / 'sensor'
+SENSOR_DIR.mkdir(parents=True, exist_ok=True)
 
 def main():
 
