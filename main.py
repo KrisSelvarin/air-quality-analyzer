@@ -148,7 +148,7 @@ def main():
             'r2_test': r2_test
         })
 
-        pd.DataFrame(results).to_csv(SENSOR_DIR / 'sensor_results.csv', index=False)
+    pd.DataFrame(results).to_csv(SENSOR_DIR / 'sensor_results.csv', index=False)
 
 if __name__ == '__main__':
     start = time.time()
