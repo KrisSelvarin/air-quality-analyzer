@@ -98,9 +98,9 @@ def main():
     # 1. Sensor Correlation
 
     correlate = [
-        ('Correlation Between PT08.S1(CO) Sensor Signal and CO Concentration', 'PT08.S1(CO)', 'CO(GT)', 'corr_PT08.S1(CO)_CO(GT)'),
-        ('Correlation Between PT08.S3(NOx) Sensor Signal and NOx Concentration', 'PT08.S3(NOx)', 'NOx(GT)', 'corr_PT08.S3(NOx)_NOx(GT)'),
-        ('Correlation Between PT08.S4(NO2) Sensor Signal and NO2 Concentration', 'PT08.S4(NO2)', 'NO2(GT)', 'corr_PT08.S4(NO2)_NO2(GT)')
+        ('Correlation Between PT08.S1(CO) Sensor Signal and CO Concentration', 'PT08.S1(CO)', 'CO(GT)', 'correlation_PT08.S1(CO)_CO(GT).png'),
+        ('Correlation Between PT08.S3(NOx) Sensor Signal and NOx Concentration', 'PT08.S3(NOx)', 'NOx(GT)', 'correlation_PT08.S3(NOx)_NOx(GT).png'),
+        ('Correlation Between PT08.S4(NO2) Sensor Signal and NO2 Concentration', 'PT08.S4(NO2)', 'NO2(GT)', 'correlation_PT08.S4(NO2)_NO2(GT).png')
     ]
 
     for title_cor, x_cor, y_cor, filename_cor in correlate:
@@ -113,9 +113,9 @@ def main():
     # 2. Residual Analysis, Mean Absolute Error, Root Mean Square Error, Split Validation
 
     res_analysis = [
-        ('PT08.S1(CO)', 'CO(GT)', 'Residual Distribution: PT08.S1(CO) vs CO(GGT)', 'residual_PT08.S1(CO)_CO(GT)'),
-        ('PT08.S3(NOx)', 'NOx(GT)', 'Residual Distribution: PT08.S3(NOx) vs NOx(GT)', 'residual_PT08.S3(NOx)_NOx(GT)'),
-        ('PT08.S4(NO2)', 'NO2(GT)', 'Residual Distribution: PT08.S4(NO2) vs NO2(GT)', 'residual_PT08.S4(NO2)_NO2(GT)')
+        ('PT08.S1(CO)', 'CO(GT)', 'Residual Distribution: PT08.S1(CO) vs CO(GGT)', 'residual_PT08.S1(CO)_CO(GT).png'),
+        ('PT08.S3(NOx)', 'NOx(GT)', 'Residual Distribution: PT08.S3(NOx) vs NOx(GT)', 'residual_PT08.S3(NOx)_NOx(GT).png'),
+        ('PT08.S4(NO2)', 'NO2(GT)', 'Residual Distribution: PT08.S4(NO2) vs NO2(GT)', 'residual_PT08.S4(NO2)_NO2(GT).png')
     ]
 
     results = []

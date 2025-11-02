@@ -104,7 +104,7 @@ class Sensor:
 
             # create scatter plot
             logger.info(f'Creating scatter plot with x as {x} and y as {y}.')
-            sns.scatterplot(data=self.data, x=x, y=y, alpha=0.6, ax=ax)
+            sns.scatterplot(data=self.df, x=x, y=y, alpha=0.6, ax=ax)
 
             # create regplot
             logger.info(f'Creating regplot.')
