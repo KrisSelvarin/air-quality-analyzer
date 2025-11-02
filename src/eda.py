@@ -220,9 +220,3 @@ class Exploratory:
         except Exception as e:
             logger.error(f'Error while generating relation plot {title}: %s', e, exc_info=True)
             raise
-
-    # for sensor calibration
-    def sensor(self):
-        """
-        For 
-        """

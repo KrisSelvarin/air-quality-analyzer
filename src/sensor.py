@@ -188,9 +188,6 @@ class Sensor:
                 model (sklearn.linear_model.LinearRegression):  
                     The trained LinearRegression model fitted on the given feature and target.
                     
-                residuals (pandas.Series):  
-                    The residuals for each sample, computed as (y_true - y_pred).
-                    
                 X (pandas.DataFrame):  
                     The feature data used to train and predict, containing the selected `feature`.
     
@@ -243,7 +240,7 @@ class Sensor:
 
             # labels
             logger.info(f'Set title to {title}')
-            ax.set_title(title)
+            ax.set_title(title, fontsize=20, fontweight='bold')
             logger.info(f'Set xlabel to {xlabel}')
             ax.set_xlabel(xlabel)
 
@@ -251,15 +248,14 @@ class Sensor:
             plt.tight_layout()
 
             # return fig, model, residuals
-            return fig, model, residuals, X, y, y_pred
+            return fig, model, X, y, y_pred
         
         except Exception as e:
             logger.error(f'Error while generating residuals histplot {title}: %s', e, exc_info=True)
             raise
 
-
+    @staticmethod
     def accurate(
-            self,
             y,
             y_pred,
     ):
@@ -322,7 +318,8 @@ class Sensor:
             logger.error('Unexpected error during accuracy metric computation: %s', e, exc_info=True)
             raise
 
-    def split_validation(self, X, y):
+    @staticmethod
+    def split_validation(X, y):
         """
         Evaluate model generalization using train-test split and R² metrics.
 
@@ -361,7 +358,6 @@ class Sensor:
             - A large difference between training and testing R² may suggest overfitting.  
             - All operations and results are logged for traceability and debugging.
         """
-
 
         try:
             # splitting the data

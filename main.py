@@ -4,6 +4,8 @@ from pathlib import Path
 from src.logger_config import setup_logger
 from src.clean import data_clean
 from src.eda import Exploratory
+from src.sensor import Sensor
+import pandas as pd
 import time
 
 # logger
@@ -89,7 +91,64 @@ def main():
     # Sensor Performance Evaluation
     # ----------------------------------------------------------
 
-    # TODO: sensor perfomance evaluation 
+    logger.info('Creating object sensor with dataframe')
+    sensor = Sensor(df)
+
+    # ----------------------------------------------------------
+    # 1. Sensor Correlation
+
+    correlate = [
+        ('Correlation Between PT08.S1(CO) Sensor Signal and CO Concentration', 'PT08.S1(CO)', 'CO(GT)', 'corr_PT08.S1(CO)_CO(GT)'),
+        ('Correlation Between PT08.S3(NOx) Sensor Signal and NOx Concentration', 'PT08.S3(NOx)', 'NOx(GT)', 'corr_PT08.S3(NOx)_NOx(GT)'),
+        ('Correlation Between PT08.S4(NO2) Sensor Signal and NO2 Concentration', 'PT08.S4(NO2)', 'NO2(GT)', 'corr_PT08.S4(NO2)_NO2(GT)')
+    ]
+
+    for title_cor, x_cor, y_cor, filename_cor in correlate:
+        logger.info(f'Creating scatterplot for {title_cor}')
+        fig_cor = sensor.sensor_correlation(title_cor, x=x_cor, y=y_cor)
+        fig_cor.savefig(SENSOR_DIR / filename_cor)
+        logger.info(f'Figure saved to {SENSOR_DIR}')
+
+    # ----------------------------------------------------------
+    # 2. Residual Analysis, Mean Absolute Error, Root Mean Square Error, Split Validation
+
+    res_analysis = [
+        ('PT08.S1(CO)', 'CO(GT)', 'Residual Distribution: PT08.S1(CO) vs CO(GGT)', 'residual_PT08.S1(CO)_CO(GT)'),
+        ('PT08.S3(NOx)', 'NOx(GT)', 'Residual Distribution: PT08.S3(NOx) vs NOx(GT)', 'residual_PT08.S3(NOx)_NOx(GT)'),
+        ('PT08.S4(NO2)', 'NO2(GT)', 'Residual Distribution: PT08.S4(NO2) vs NO2(GT)', 'residual_PT08.S4(NO2)_NO2(GT)')
+    ]
+
+    results = []
+
+    for feature, target, title_res, filename_res in res_analysis:
+
+        # residual analysis
+        logger.info(f'Creating histplot for {title_res}')
+        fig_res, model, X, y, y_pred = sensor.residual_analysis(feature, target, title_res)
+        fig_res.savefig(SENSOR_DIR / filename_res)
+        logger.info(f'Figure saved to {SENSOR_DIR}')
+
+        # MAE, RMSE
+        logger.info('Calculating MAE and RMSE')
+        mae, rmse = sensor.accurate(y, y_pred)
+
+        # Split Validation
+        logger.info('Splitting, Training, Testiing Data')
+        r2_train, r2_test = sensor.split_validation(X, y)
+
+        # saving results to csv file
+        results.append({
+            'feature': feature,
+            'target': target,
+            'coef': float(model.coef_[0]),
+            'intercept': float(model.intercept_),
+            'mae': mae,
+            'rmse': rmse,
+            'r2_train': r2_train,
+            'r2_test': r2_test
+        })
+
+        pd.DataFrame(results).to_csv(SENSOR_DIR / 'sensor_results.csv', index=False)
 
 if __name__ == '__main__':
     start = time.time()
@@ -99,6 +158,7 @@ if __name__ == '__main__':
         main()
         elapsed = time.time() - start
         logger.info(f'Program Done in {elapsed:.2f} seconds.')
+
     except Exception as e:
         elapsed = time.time() - start
         logger.error(f'Program Crashed after {elapsed:.2f} seconds', exc_info=True)
